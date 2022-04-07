@@ -2,12 +2,11 @@
 
 # Class: 2022 WA1-KZ
 
-## Team name: TEAM_NAME
+## Team name: Frontend Enjoyers
 Team members:
-* s123456 LASTNAME FIRSTNAME
-* s123456 LASTNAME FIRSTNAME 
-* s123456 LASTNAME FIRSTNAME
-* s123456 LASTNAME FIRSTNAME (delete line if not needed)
+* s302219 Mastrandrea Mario
+* s295220 Marra Benito 
+* s301208 Paniati Simone
 
 ## Instructions
 
