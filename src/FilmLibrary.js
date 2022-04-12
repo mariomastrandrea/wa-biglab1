@@ -58,8 +58,8 @@ function loadFilters() {
       "All",
       "Favorites",
       "Best rated",
-      "Last seen",
-      "Seen last month"
+      "Seen last month",
+      "Unseen"
    ];
 
    return filters;

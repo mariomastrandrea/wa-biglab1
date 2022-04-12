@@ -11,17 +11,18 @@ function FilmRows(props) {
 }
 
 function FilmRow(props) {
-   let film = props.film;
+   const film = props.film;
+   const filmTitleClass = `${film.favorite ? "favorite-" : ""}film-title`;
 
    return (
       <tr>
          <td key="film-title">
             <PencilSquare className="me-1 action-icon" size="0.95em" />
             <Trash className="me-3 action-icon" size="0.95em" />
-            {film.title}
+            <span className={filmTitleClass}>{film.title}</span>
          </td>
          <td key="film-favorite">
-            <Form.Check type="checkbox" label="Favorite"  checked={film.favorite} readOnly/>
+            <Form.Check type="checkbox" label="Favorite" checked={film.favorite} readOnly/>
          </td>
          <td key="film-watchdate">{film.Watchdate?.format("MMMM D, YYYY")}</td>
          <td key="film-rating">
