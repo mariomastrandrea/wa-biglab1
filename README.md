@@ -10,7 +10,7 @@ Team members:
 
 ## Instructions
 
-A general description of the BigLab 1 is avaible in the `materials` repository, [under _labs_](https://polito-wa1-aw1-2022.github.io/materials/labs/BigLab1/BigLab1.pdf). In the same repository, you can find the [instructions for GitHub Classroom](https://polito-wa1-aw1-2022.github.io/materials/labs/GH-Classroom-BigLab-Instructions.pdf), covering this and the next BigLab.
+A general description of the BigLab 1 is available in the `materials` repository, [under _labs_](https://polito-wa1-aw1-2022.github.io/materials/labs/BigLab1/BigLab1.pdf). In the same repository, you can find the [instructions for GitHub Classroom](https://polito-wa1-aw1-2022.github.io/materials/labs/GH-Classroom-BigLab-Instructions.pdf), covering this and the next BigLab.
 
 Once cloned this repository, instead, write your names in the above section.
 

@@ -1,65 +1,54 @@
-import './App.css';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Form, Navbar, Row, Col, ListGroup, Table } from 'react-bootstrap';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import "./FilmLibrary.js"
-import { films } from './FilmLibrary';
-import {FilmRows} from "./libreria.js";
+import { Container, Row, Col } from 'react-bootstrap';
+import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
+import FiltersBox from './components/FiltersBox';
+import FilmTable from './components/FilmTable';
+import AddButton from './components/AddButton';
+import './App.css';
+import FilmLibraryNavbar from './components/FilmLibraryNavbar.js';
+
+const filmLibrary = loadFilmLibrary();
+const filmFilters = loadFilters();
+const filmHeaders = loadFilmHeaders();
+
 
 function App() {
-    return (
-            <Container fluid className="vh-100">
-                <Row>
-                    <Navbar bg="primary" variant="dark" expand="lg">
-                        <Container fluid>
-                            <Navbar.Brand>  {/*Possiamo mettere Anche NavbarBrand */}
-                                <i class="bi bi-play-circle"></i>
-                                Film library
-                            </Navbar.Brand>
 
-                            <Form>
-                                <Form.Control type="text" placeholder="Search..." />
-                            </Form>
+   const [films, setFilms] = useState(filmLibrary.films);
+   const filters = useState(filmFilters)[0];
+   const [activeFilter, setActiveFilter] = useState("All");
+   const headers = useState(filmHeaders)[0];
 
-                            <i class="bi bi-person-circle text-white"></i>
-                        </Container>
-                    </Navbar>
-                </Row>
-                <Row className='h-100'>
-                    <Col className="col-3 p-0 h-100">
-                        <ListGroup className="bg-light h-100">
-                            <ListGroup.Item className='list-group-item-action' active>All</ListGroup.Item>
-                            <ListGroup.Item className='list-group-item-action' action>Favorites</ListGroup.Item>
-                            <ListGroup.Item className='list-group-item-action' action>Best rated</ListGroup.Item>
-                            <ListGroup.Item className='list-group-item-action' action>Last seen</ListGroup.Item>
-                            <ListGroup.Item className='list-group-item-action' action>Seen last month</ListGroup.Item>
-                        </ListGroup>
-                    </Col>
+   return (
+      <Container fluid className="vh-100">
+         <Row as="header">
+            <FilmLibraryNavbar />
+         </Row>
 
-                    <Col className="col-9">
-                        <Row>
-                            <h1 class="pt-1">All</h1>
-                        </Row>
+         <Row className='h-100'>
+            <Col as="aside" className="bg-light col-3 p-4 h-100">
+               <FiltersBox className="h-100" filters={filters} active={activeFilter} />
+            </Col>
 
-                        <Row>
-                            <Table>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Favorite</th>
-                                        <th scope="col">WatchDate</th>
-                                        <th scope="col">Rating</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <FilmRows films={films}></FilmRows> 
-                                </tbody>
-                            </Table>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-        );
+            <Col className="col-9">
+               <Container fluid>
+                  <Row className="p-3 pt-4">
+                     <h1>All</h1>
+                  </Row>
+
+                  <Row as="main" className="px-4">
+                     <FilmTable headers={headers} films={films} />
+                  </Row>
+
+                  <Row className="m-1">
+                     <AddButton>+</AddButton>
+                  </Row>
+               </Container>
+            </Col>
+         </Row>
+      </Container>
+   );
 }
 
 export default App;
