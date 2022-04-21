@@ -20,6 +20,11 @@ function App() {
    const [activeFilter, setActiveFilter] = useState("All");
    const headers = useState(filmHeaders)[0];
 
+   const changeFilter = (filterKey) => {
+      setActiveFilter(filterKey);
+      console.log("changed");
+   }
+
    return (
       <Container fluid className="vh-100">
          <Row as="header">
@@ -28,7 +33,7 @@ function App() {
 
          <Row className='h-100'>
             <Col as="aside" className="bg-light col-3 p-4 h-100">
-               <FiltersBox className="h-100" filters={filters} active={activeFilter} />
+               <FiltersBox className="h-100" filters={filters} active={activeFilter} changeFilter={changeFilter}/>
             </Col>
 
             <Col className="col-9">
