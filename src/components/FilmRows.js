@@ -13,6 +13,8 @@ function FilmRows(props) {
 function FilmRow(props) {
    const film = props.film;
    const filmTitleClass = `${film.favorite ? "favorite-" : ""}film-title`;
+   
+
 
    return (
       <tr>

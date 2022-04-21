@@ -56,7 +56,7 @@ function loadFilmLibrary() {
 function loadFilters() {
    const filters = [
       "All",
-      "Favorites",
+      "Favorite",
       "Best rated",
       "Seen last month",
       "Unseen"

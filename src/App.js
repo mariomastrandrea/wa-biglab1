@@ -7,6 +7,7 @@ import FilmTable from './components/FilmTable';
 import AddButton from './components/AddButton';
 import './App.css';
 import FilmLibraryNavbar from './components/FilmLibraryNavbar.js';
+import dayjs from "dayjs";
 
 const filmLibrary = loadFilmLibrary();
 const filmFilters = loadFilters();
@@ -19,12 +20,36 @@ function App() {
    const filters = useState(filmFilters)[0];
    const [activeFilter, setActiveFilter] = useState("All");
    const headers = useState(filmHeaders)[0];
+   const [filmsShown, setFilmsShown] = useState(filmLibrary.films);
 
    const changeFilter = (filterKey) => {
       setActiveFilter(filterKey);
-      console.log("changed");
-   }
 
+      setFilmsShown(() => {
+         
+         switch(filterKey) {
+
+            case 'All':
+               return films;
+
+            case 'Favorite':
+               return films.filter(film => film.favorite);
+
+            case 'Best rated':
+               return films.filter(film => film.rating === 5);
+
+            case 'Seen last month':
+               return films.filter(film =>  (film.Watchdate !== undefined) && (dayjs().diff(film.Watchdate, 'day') <= 30));
+
+            case 'Unseen':
+               return films.filter(film => film.Watchdate===undefined);
+
+            default :
+               return films;
+         }
+      });
+   }
+ 
    return (
       <Container fluid className="vh-100">
          <Row as="header">
@@ -43,7 +68,7 @@ function App() {
                   </Row>
 
                   <Row as="main" className="px-4">
-                     <FilmTable headers={headers} films={films} />
+                     <FilmTable headers={headers} films={filmsShown} filter={activeFilter}/>
                   </Row>
 
                   <Row className="m-1">
