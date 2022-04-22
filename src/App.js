@@ -13,14 +13,13 @@ const filmLibrary = loadFilmLibrary();
 const filmFilters = loadFilters();
 const filmHeaders = loadFilmHeaders();
 
-
 function App() {
-
-   const [films, setFilms] = useState(filmLibrary.films);
+   //STATES
+   const [films, setFilms] = useState(filmLibrary);
    const filters = useState(filmFilters)[0];
    const [activeFilter, setActiveFilter] = useState("All");
    const headers = useState(filmHeaders)[0];
-   const [filmsShown, setFilmsShown] = useState(filmLibrary.films);
+   const [filmsShown, setFilmsShown] = useState(filmLibrary.all());
 
    const changeFilter = (filterKey) => {
       setActiveFilter(filterKey);
@@ -30,22 +29,22 @@ function App() {
          switch(filterKey) {
 
             case 'All':
-               return films;
+               return films.all();
 
             case 'Favorite':
-               return films.filter(film => film.favorite);
+               return films.favorite();
 
             case 'Best rated':
-               return films.filter(film => film.rating === 5);
+               return films.bestRated();
 
             case 'Seen last month':
-               return films.filter(film =>  (film.Watchdate !== undefined) && (dayjs().diff(film.Watchdate, 'day') <= 30));
+               return films.seenLastMonth();
 
             case 'Unseen':
-               return films.filter(film => film.Watchdate===undefined);
+               return films.unseen();
 
             default :
-               return films;
+               return films.all();
          }
       });
    }

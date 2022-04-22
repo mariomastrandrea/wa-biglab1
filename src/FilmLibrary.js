@@ -12,6 +12,17 @@ function FilmLibrary() {
    this.films = [];
 
    this.addNewFilm = (newFilm) => this.films.push(newFilm);
+
+   this.all = () => [...this.films];
+
+   this.favorite = () => this.films.filter(film => film.favorite);
+
+   this.bestRated = () => this.films.filter(film => film.rating === 5);
+
+   this.seenLastMonth = () => this.films.filter(film =>  (film.Watchdate !== undefined) && (dayjs().diff(film.Watchdate, 'day') <= 30));
+
+   this.unseen = () => this.films.filter(film => film.Watchdate===undefined);
+
    this.sortByDate = () => [...this.films].sort((film1, film2) => {
 
       if (!film2.Watchdate) return -1;
