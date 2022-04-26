@@ -6,7 +6,9 @@ function FilmRows(props) {
    let library = props.films;
 
    return (
-      library.map((film) => <FilmRow film={film} key={`film-${film.id}`} />)
+      //meglio fare library.filter(...).map(...) invece che usare 2 stati
+      //library.map((film) => <FilmRow film={film} key={`film-${film.id}`} />)
+      library.filter(film => film.filter(props.activeFilter)).map((film) => <FilmRow film={film} key={`film-${film.id}`} />)
    );
 }
 
