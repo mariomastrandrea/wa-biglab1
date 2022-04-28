@@ -11,7 +11,8 @@ function FilmTable(props) {
             <FilmHeadersRow headers={props.headers} />
          </thead>
          <tbody>
-            <FilmRows films={props.films} activeFilter={props.filter} key={`filter-${props.filter}`}/>
+            <FilmRows setFilmFavorite={props.setFilmFavorite} setFilmRating={props.setFilmRating} deleteFilm={props.deleteFilm} films={props.films} 
+               activeFilter={props.filter} key={`filter-${props.filter}`}/>
          </tbody>
       </Table>
    );

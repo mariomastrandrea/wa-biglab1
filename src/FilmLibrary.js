@@ -90,7 +90,7 @@ function loadFilmHeaders() {
       "Title",
        "Favorite", 
        "Date", 
-       "Rating"
+       "Rating",
    ];
 
    return filmHeaders;
