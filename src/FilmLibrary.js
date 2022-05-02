@@ -96,4 +96,4 @@ function loadFilmHeaders() {
    return filmHeaders;
 }
 
-export { loadFilmLibrary, loadFilters, loadFilmHeaders };
+export {Film, loadFilmLibrary, loadFilters, loadFilmHeaders };

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
 import FiltersBox from './components/FiltersBox';
 import FilmTable from './components/FilmTable';
@@ -9,6 +9,7 @@ import FilmForm from './components/Form';
 import './App.css';
 import FilmLibraryNavbar from './components/FilmLibraryNavbar.js';
 import dayjs from "dayjs";
+
 
 const filmLibrary = loadFilmLibrary();
 const filmFilters = loadFilters();
@@ -22,10 +23,16 @@ function App() {
    const filters = useState(filmFilters)[0];
    const [activeFilter, setActiveFilter] = useState("All");
    const headers = useState(filmHeaders)[0];
+   const [adder,setAdder] = useState(false)
+
+   function addFilm(film){
+      setFilms((old)=>[...old,film]);
+   }
 
    function deleteFilm(id) {
       setFilms((old) => old.filter((film) => film.id !== id));
    }
+
 
    function setFilmRating(id, newRating) {
       setFilms((old) => old.map(film => {
@@ -37,6 +44,7 @@ function App() {
          return newFilm;
       }));
    }
+
 
    function setFilmFavorite(id, favorite) {
       setFilms((old) => old.map(film => {
@@ -73,11 +81,15 @@ function App() {
                   </Row>
 
                   <Row className="m-1">
-                     <AddButton>+</AddButton>
+
+                     <AddButton setAdd={setAdder}>+</AddButton> 
+                  
                   </Row>
 
                   <Row>
-                     <FilmForm />
+                     
+                     {adder===true && <FilmForm addFilm={addFilm} setAdder={setAdder}/> }
+                     
                   </Row>
                </Container>
             </Col>
