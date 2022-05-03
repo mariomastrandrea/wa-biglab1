@@ -1,6 +1,7 @@
 import { Form, Button } from 'react-bootstrap'
 import { PencilSquare, Trash, Star, StarFill, StarHalf } from 'react-bootstrap-icons';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function FilmRows(props) {
@@ -22,7 +23,9 @@ function FilmRow(props) {
    return (
       <tr>
          <td key="film-title">
-            <PencilSquare className="me-1 action-icon" size="0.95em" />
+            <Link to={`/editfilm/${film.id}`}>
+               <PencilSquare className="me-1 action-icon" size="0.95em" />
+            </Link>
             <Trash onClick={() => props.deleteFilm(film.id)} className="me-3 action-icon" size="0.95em" />
             <span className={filmTitleClass}>{film.title}</span>
          </td>

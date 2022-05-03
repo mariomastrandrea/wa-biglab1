@@ -9,6 +9,10 @@ import FilmForm from './components/Form';
 import './App.css';
 import FilmLibraryNavbar from './components/FilmLibraryNavbar.js';
 import dayjs from "dayjs";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from "./routes/Home";
+import NewFilmForm from "./routes/NewFilmForm";
+import EditFilmForm from "./routes/EditFilmForm";
 
 
 const filmLibrary = loadFilmLibrary();
@@ -23,7 +27,6 @@ function App() {
    const filters = useState(filmFilters)[0];
    const [activeFilter, setActiveFilter] = useState("All");
    const headers = useState(filmHeaders)[0];
-   const [adder,setAdder] = useState(false)
 
    function addFilm(film){
       setFilms((old)=>[...old,film]);
@@ -56,45 +59,46 @@ function App() {
          return newFilm;
       }));
    }
- 
+
+   function editFilm(film) {
+      setFilms((old) => old.map(oldFilm => {
+         if(oldFilm.id === film.id)
+            return film;
+
+         return oldFilm;
+      }))
+   }
+
    return (
-      <Container fluid className="vh-100">
-         <Row as="header">
-            <FilmLibraryNavbar />
-         </Row>
+      <BrowserRouter>
+         <Routes>
+            <Route index element={
+               <Home
+                  filters={filters}
+                  setActiveFilter={setActiveFilter}
+                  setFilmFavorite={setFilmFavorite}
+                  setFilmRating={setFilmRating}
+                  deleteFilm={deleteFilm}
+                  headers={headers}
+                  films={films}
+                  activeFilter={activeFilter}
+               />
+            }/>
 
-         <Row className='h-100'>
-            <Col as="aside" className="bg-light col-3 p-4 h-100">
-               <FiltersBox className="h-100" filters={filters} active={activeFilter} 
-                  changeFilter={(filterKey) => setActiveFilter(filterKey)}/>
-            </Col>
+            <Route path="/addfilm" element={
+               <NewFilmForm
+                  addFilm={addFilm}
+               />
+            }/>
 
-            <Col className="col-9">
-               <Container fluid>
-                  <Row className="p-3 pt-4">
-                     <h1>All</h1>
-                  </Row>
-
-                  <Row as="main" className="px-4">
-                     <FilmTable setFilmFavorite={setFilmFavorite} setFilmRating={setFilmRating} deleteFilm={deleteFilm} 
-                        headers={headers} films={films} filter={activeFilter}/>
-                  </Row>
-
-                  <Row className="m-1">
-
-                     <AddButton setAdd={setAdder}>+</AddButton> 
-                  
-                  </Row>
-
-                  <Row>
-                     
-                     {adder===true && <FilmForm addFilm={addFilm} setAdder={setAdder}/> }
-                     
-                  </Row>
-               </Container>
-            </Col>
-         </Row>
-      </Container>
+            <Route path="/editFilm/:editFilmId" element={
+               <EditFilmForm
+                  editFilm={editFilm}
+                  films={films}
+               />
+            }/>
+         </Routes>
+      </BrowserRouter>
    );
 }
 
