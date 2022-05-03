@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Container, Row, Col } from 'react-bootstrap';
 import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
-import FiltersBox from './components/FiltersBox';
-import FilmTable from './components/FilmTable';
-import AddButton from './components/AddButton';
-import FilmForm from './components/Form';
 import './App.css';
-import FilmLibraryNavbar from './components/FilmLibraryNavbar.js';
-import dayjs from "dayjs";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from "./routes/Home";
 import NewFilmForm from "./routes/NewFilmForm";
