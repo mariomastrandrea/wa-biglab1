@@ -34,7 +34,6 @@ function FilmForm(props) {
                     <Form.Control type="text" value={id} required={true} placeholder="Film Id" onChange={(event)=>{setId(event.target.value)}}></Form.Control>
                 </Form.Group>
 
-
                 <Form.Group className='mb-3'>
                     <Form.Label>Title</Form.Label>
                     <Form.Control type="text" value={title} required={true} placeholder="Film Title" onChange={(event)=>{setTitle(event.target.value)}}></Form.Control>
@@ -52,7 +51,7 @@ function FilmForm(props) {
 
                 <Form.Group className='mb-3'>
                     <Form.Label>Rating</Form.Label>
-                    <Form.Control type="number" value={rating} required={false}  onChange={(event)=>{setRating(event.target.value)}} min={0} max={5}></Form.Control>
+                    <Form.Control type="number" value={rating} required={false} onChange={(event)=>{setRating(event.target.value)}} min={0} max={5}></Form.Control>
                 </Form.Group>
 
                 <Button variant='outline-success' type="submit">Confirm</Button>

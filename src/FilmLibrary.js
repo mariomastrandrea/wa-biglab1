@@ -7,18 +7,18 @@ function Film(id, title, favorite = false, Watchdate, rating) {
    this.Watchdate = Watchdate ? dayjs(Watchdate) : undefined;
    this.rating = rating;
 
-   this.filter = function(filterName) {
-      switch(filterName) {
-         case "All":
+   this.filter = function (filterName) {
+      switch (filterName) {
+         case "all":
             return true;
-         case "Favorite":
+         case "favorite":
             return this.favorite;
-         case "Best rated":
+         case "best-rated":
             return this.rating === 5;
-         case "Seen last month":
+         case "seen-last-month":
             return (this.Watchdate !== undefined) && (dayjs().diff(this.Watchdate, 'day') <= 30);
-         case "Unseen":
-            return this.Watchdate===undefined;
+         case "unseen":
+            return this.Watchdate === undefined;
          default:
             return true;
       }
@@ -28,7 +28,7 @@ function Film(id, title, favorite = false, Watchdate, rating) {
 function FilmLibrary() {
    this.films = [];
 
-   this.addNewFilm = function(film) {
+   this.addNewFilm = function (film) {
       this.films.push(film);
    }
 
@@ -88,12 +88,12 @@ function loadFilters() {
 function loadFilmHeaders() {
    const filmHeaders = [
       "Title",
-       "Favorite", 
-       "Date", 
-       "Rating",
+      "Favorite",
+      "Date",
+      "Rating",
    ];
 
    return filmHeaders;
 }
 
-export {Film, loadFilmLibrary, loadFilters, loadFilmHeaders };
+export { Film, loadFilmLibrary, loadFilters, loadFilmHeaders };

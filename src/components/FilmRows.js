@@ -8,7 +8,6 @@ function FilmRows(props) {
    let library = props.films;
 
    return (
-      //meglio fare library.filter(...).map(...) invece che usare 2 stati (solo x Te Benny <3)
       library.filter(film => film.filter(props.activeFilter))
          .map((film) =>
             <FilmRow setFilmFavorite={props.setFilmFavorite} setFilmRating={props.setFilmRating} deleteFilm={props.deleteFilm}
@@ -23,7 +22,7 @@ function FilmRow(props) {
    return (
       <tr>
          <td key="film-title">
-            <Link to={`/editfilm/${film.id}`}>
+            <Link to={`/editFilm/${film.id}`}>
                <PencilSquare className="me-1 action-icon" size="0.95em" />
             </Link>
             <Trash onClick={() => props.deleteFilm(film.id)} className="me-3 action-icon" size="0.95em" />
