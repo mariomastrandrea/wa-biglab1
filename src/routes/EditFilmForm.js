@@ -1,4 +1,4 @@
-import FilmForm from "../components/Form";
+import FilmForm from "../components/filmComponents/FilmForm";
 import { useParams } from "react-router-dom";
 import  ErrorForm  from "../components/ErrorForm";
 

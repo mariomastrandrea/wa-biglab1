@@ -1,25 +1,21 @@
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
 import './App.css';
+import { useState } from 'react';
+import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./routes/Home";
 import NewFilmForm from "./routes/NewFilmForm";
 import EditFilmForm from "./routes/EditFilmForm";
-import GenericNavbar from './components/GenericNavbar.js';
-
 
 const filmLibrary = loadFilmLibrary();
 const filmFilters = loadFilters();
 const filmHeaders = loadFilmHeaders();
 
 
-
 function App() {
-   //STATES
+   // states
    const [films, setFilms] = useState(filmLibrary.films);
    const filters = useState(filmFilters)[0];
-   const [activeFilter, setActiveFilter] = useState("All");
    const headers = useState(filmHeaders)[0];
 
    function addFilm(film) {
@@ -67,31 +63,28 @@ function App() {
             <Route index element={
                <Home
                   filters={filters}
-                  setActiveFilter={setActiveFilter}
                   setFilmFavorite={setFilmFavorite}
                   setFilmRating={setFilmRating}
                   deleteFilm={deleteFilm}
                   headers={headers}
                   films={films}
-                  activeFilter={activeFilter}
+                  activeFilter={"all"}
                />
             } />
 
             <Route path="/:activeFilter" element={
                <Home
                   filters={filters}
-                  setActiveFilter={setActiveFilter}
                   setFilmFavorite={setFilmFavorite}
                   setFilmRating={setFilmRating}
                   deleteFilm={deleteFilm}
                   headers={headers}
                   films={films}
-                  activeFilter={activeFilter}
                   filterFlag={true}
                />
             } />
 
-            <Route path="/addfilm" element={
+            <Route path="/addFilm" element={
                <NewFilmForm
                   addFilm={addFilm}
                />

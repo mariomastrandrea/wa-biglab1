@@ -1,15 +1,18 @@
 import { Container, Navbar, Form } from "react-bootstrap";
 import { PersonCircle, PlayCircle } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 
-function FilmLibraryNavbar(props) {
+function FilmLibraryNavbar() {
+   const navigate = useNavigate();
+
    return (
       <Navbar bg="primary" variant="dark" expand="md">
          <Container fluid>
             <Navbar.Toggle />
 
             <Navbar.Brand className="d-flex align-items-center">
-               <PlayCircle size="1.2em" className="me-1 action-icon" />
+               <PlayCircle onClick={() => navigate("/")} size="1.2em" className="me-1 action-icon" />
                <span>Film Library</span>
             </Navbar.Brand>
 

@@ -1,7 +1,7 @@
-import { Form, Button } from 'react-bootstrap'
-import { PencilSquare, Trash, Star, StarFill, StarHalf } from 'react-bootstrap-icons';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Form } from 'react-bootstrap'
+import { PencilSquare, Trash, Star, StarFill, StarHalf } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 
 
 function FilmRows(props) {
@@ -10,29 +10,30 @@ function FilmRows(props) {
    return (
       library.filter(film => film.filter(props.activeFilter))
          .map((film) =>
-            <FilmRow setFilmFavorite={props.setFilmFavorite} setFilmRating={props.setFilmRating} deleteFilm={props.deleteFilm}
-               film={film} key={`film-${film.id}`} />)
+            <FilmRow setFilmFavorite={props.setFilmFavorite} setFilmRating={props.setFilmRating} 
+               deleteFilm={props.deleteFilm} film={film} key={`film-${film.id}`} />)
    );
 }
 
 function FilmRow(props) {
    const film = props.film;
    const filmTitleClass = `${film.favorite ? "favorite-" : ""}film-title`;
+   const navigate = useNavigate();
 
    return (
       <tr>
          <td key="film-title">
-            <Link to={`/editFilm/${film.id}`}>
-               <PencilSquare className="me-1 action-icon" size="0.95em" />
-            </Link>
-            <Trash onClick={() => props.deleteFilm(film.id)} className="me-3 action-icon" size="0.95em" />
+            <PencilSquare onClick={() => navigate(`/editFilm/${film.id}`)} 
+               className="me-1 action-icon" size="0.95em" />
+            <Trash onClick={() => props.deleteFilm(film.id)} 
+               className="me-3 action-icon" size="0.95em" />
             <span className={filmTitleClass}>{film.title}</span>
          </td>
          <td key="film-favorite">
             <Form.Check onChange={(event) => props.setFilmFavorite(film.id, event.target.checked)}
-               type="checkbox" label="Favorite" checked={film.favorite} />
+               type="checkbox" label="Favorite" checked={film.favorite} className="action-icon-wrapper" />
          </td>
-         <td key="film-watchdate">{film.Watchdate?.format("MMMM D, YYYY")}</td>
+         <td key="film-watchdate">{film.watchdate?.format("MMMM D, YYYY")}</td>
          <td key="film-rating">
             <Rating setFilmRating={props.setFilmRating} film={film} />
          </td>
@@ -53,10 +54,10 @@ function Rating(props) {
          <StarFill color={rating === hoverRating ? "current-color" : "#0d6efd"}
             onMouseOut={() => setHoverRating(rating)} onMouseOver={() => setHoverRating(i + 1)}
             onClick={() => props.setFilmRating(props.film.id, i + 1)} 
-            key={`${count}-star`} /> :
+            key={`${count}-star`} className="action-icon" /> :
          <Star onMouseOut={() => setHoverRating(rating)} onMouseOver={() => setHoverRating(i + 1)}
             onClick={() => props.setFilmRating(props.film.id, i + 1)} 
-            key={`${count}-star`} />
+            key={`${count}-star`} className="action-icon" />
       );
    }
 

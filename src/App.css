@@ -42,7 +42,7 @@ main .table td, main .table th {
 }
 
 /* set cursor on icons */
-.action-icon {
+.action-icon, .action-icon-wrapper > * {
    cursor: pointer;
 }
 
@@ -63,4 +63,10 @@ button.circular-button {
 
 .favorite-film-title {
    color: red;
+}
+
+/* remove bootstrap blue color of <a> tag */
+
+a {
+   color: inherit
 }
