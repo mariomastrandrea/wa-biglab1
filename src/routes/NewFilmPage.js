@@ -1,11 +1,15 @@
+import { Row } from "react-bootstrap"
 import FilmForm from "../components/filmComponents/FilmForm";
-import { Container } from "react-bootstrap"
+import FilmLibraryNavbar from "../components/filmComponents/FilmLibraryNavbar";
 
 function NewFilmPage(props) {
    return (
-      <Container fluid className="vh-100">
+      <>
+         <Row as="header">
+            <FilmLibraryNavbar title="Add new film" />
+         </Row>
          <FilmForm addFilm={props.addFilm} />
-      </Container>
+      </>
    );
 }
 

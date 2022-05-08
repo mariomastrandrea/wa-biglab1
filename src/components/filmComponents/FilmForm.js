@@ -1,4 +1,3 @@
-import FilmLibraryNavbar from './FilmLibraryNavbar';
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
@@ -44,10 +43,6 @@ function FilmForm(props) {
 
    return (
       <>
-         <Row as="header">
-            <FilmLibraryNavbar title={props.film ? "Edit film" : "Add new film"} />
-         </Row>
-
          <Row className="mt-3">
             <Col></Col>
             <Col as="main" xs={5} className='my-2 p-2'>

@@ -1,19 +1,24 @@
-import FilmForm from "../components/filmComponents/FilmForm";
+import { Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import ErrorForm from "../components/ErrorForm";
-import { Container } from "react-bootstrap";
+import ErrorBox from "../components/ErrorBox";
+import FilmLibraryNavbar from "../components/filmComponents/FilmLibraryNavbar";
+import FilmForm from "../components/filmComponents/FilmForm";
 
 function EditFilmPage(props) {
    const { filmId } = useParams();
    const film = props.films.find(film => film.id === filmId); 
 
    return (
-      <Container fluid className="vh-100">
+      <>
+         <Row as="header">
+            <FilmLibraryNavbar title="Edit film" />
+         </Row>
+
          {!film ?
-            <ErrorForm /> : 
+            <ErrorBox message="ERROR: please search a correct film ID" /> : 
             <FilmForm editFilm={props.editFilm} film={film} />
          }
-      </Container>
+      </>
    );
 }
 

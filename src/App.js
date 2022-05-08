@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useState } from 'react';
-import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
 import Home from "./routes/Home";
 import NewFilmPage from "./routes/NewFilmPage";
 import EditFilmPage from "./routes/EditFilmPage";
@@ -58,45 +59,47 @@ function App() {
    }
 
    return (
-      <BrowserRouter>
-         <Routes>
-            <Route index element={
-               <Home
-                  filters={filters}
-                  setFilmFavorite={setFilmFavorite}
-                  setFilmRating={setFilmRating}
-                  deleteFilm={deleteFilm}
-                  headers={headers}
-                  films={films}
-                  activeFilter={"all"}
-               />
-            } />
+      <Container fluid className="vh-100">
+         <BrowserRouter>
+            <Routes>
+               <Route index element={
+                  <Home
+                     filters={filters}
+                     setFilmFavorite={setFilmFavorite}
+                     setFilmRating={setFilmRating}
+                     deleteFilm={deleteFilm}
+                     headers={headers}
+                     films={films}
+                     activeFilter={"all"}
+                  />
+               } />
 
-            <Route path="/:activeFilter" element={
-               <Home
-                  filters={filters}
-                  setFilmFavorite={setFilmFavorite}
-                  setFilmRating={setFilmRating}
-                  deleteFilm={deleteFilm}
-                  headers={headers}
-                  films={films}
-               />
-            } />
+               <Route path="/:activeFilter" element={
+                  <Home
+                     filters={filters}
+                     setFilmFavorite={setFilmFavorite}
+                     setFilmRating={setFilmRating}
+                     deleteFilm={deleteFilm}
+                     headers={headers}
+                     films={films}
+                  />
+               } />
 
-            <Route path="/addFilm" element={
-               <NewFilmPage
-                  addFilm={addFilm}
-               />
-            } />
+               <Route path="/addFilm" element={
+                  <NewFilmPage
+                     addFilm={addFilm}
+                  />
+               } />
 
-            <Route path="/editFilm/:filmId" element={
-               <EditFilmPage
-                  editFilm={editFilm}
-                  films={films}
-               />
-            } />
-         </Routes>
-      </BrowserRouter>
+               <Route path="/editFilm/:filmId" element={
+                  <EditFilmPage
+                     editFilm={editFilm}
+                     films={films}
+                  />
+               } />
+            </Routes>
+         </BrowserRouter>
+      </Container>
    );
 }
 

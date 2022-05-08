@@ -1,9 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import FiltersBox from '../components/FiltersBox';
-import FilmTable from '../components/filmComponents/FilmTable';
-import AddButton from '../components/AddButton';
-import FilmLibraryNavbar from '../components/filmComponents/FilmLibraryNavbar.js';
 import { useParams } from "react-router-dom";
+import FiltersBox from '../components/FiltersBox';
+import AddButton from '../components/AddButton';
+import ErrorBox from '../components/ErrorBox';
+import FilmTable from '../components/filmComponents/FilmTable';
+import FilmLibraryNavbar from '../components/filmComponents/FilmLibraryNavbar.js';
 import { revertFromSnakeCase } from "../utilities.js"
 
 function Home(props) {
@@ -17,18 +18,13 @@ function Home(props) {
    const films = props.films;
    const setFilmRating = props.setFilmRating;
 
+   let pageContent;
+
    // check if the specified filter exist, otherwise return a blank page
    if (!filters.some(filter => filter === revertFromSnakeCase(activeFilter)))
-      return <></>;
-
-   // * here the activeFilter refers to an existing one *
-
-   return (
-      <Container fluid className="vh-100">
-         <Row as="header">
-            <FilmLibraryNavbar />
-         </Row>
-
+      pageContent = <ErrorBox message="Error: please specify an existing filter" />;
+   else
+      pageContent =
          <Row className='h-100'>
             {/* sidebar */}
             <Col as="aside" className="bg-light col-3 p-4 h-100">
@@ -43,7 +39,7 @@ function Home(props) {
                   </Row>
 
                   <Row as="main" className="px-4">
-                     <FilmTable setFilmFavorite={setFilmFavorite} setFilmRating={setFilmRating} 
+                     <FilmTable setFilmFavorite={setFilmFavorite} setFilmRating={setFilmRating}
                         deleteFilm={deleteFilm} headers={headers} films={films} activeFilter={activeFilter} />
                   </Row>
 
@@ -52,8 +48,15 @@ function Home(props) {
                   </Row>
                </Container>
             </Col>
+         </Row>;
+
+   return (
+      <>
+         <Row as="header">
+            <FilmLibraryNavbar />
          </Row>
-      </Container>
+         {pageContent}
+      </>
    );
 }
 
