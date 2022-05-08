@@ -9,7 +9,9 @@ function FilmForm(props) {
       id: props.film ? props.film.id : '',
       title: props.film ? props.film.title : '',
       favorite: props.film ? props.film.favorite : false,
-      watchdate: props.film ? props.film.watchdate : '',
+      watchdate: props.film ?
+         (props.film.watchdate ? props.film.watchdate.format("YYYY-MM-DD") : '')
+         : '',
       rating: props.film ? (props.film.rating ?? 0) : 0
    }
 
@@ -49,42 +51,45 @@ function FilmForm(props) {
          <Row className="mt-3">
             <Col></Col>
             <Col as="main" xs={5} className='my-2 p-2'>
-               <Form onSubmit={handleSubmit}>
-                  <Form.Group className='my-3'>
-                     <Form.Label>Id</Form.Label>
-                     <Form.Control type="text" value={id} required={true} placeholder="Film Id" 
-                        onChange={(event) => { setId(event.target.value) }}></Form.Control>
-                  </Form.Group>
+               <div style={{ borderColor: 'grey', borderWidth: 2, borderStyle: 'dotted', 
+                  borderRadius: 10, padding: '0.5em 1.75em' }}>
+                  <Form onSubmit={handleSubmit}>
+                     <Form.Group className='my-3'>
+                        <Form.Label>Id</Form.Label>
+                        <Form.Control type="text" value={id} required={true} placeholder="Film Id"
+                           onChange={(event) => { setId(event.target.value) }}></Form.Control>
+                     </Form.Group>
 
-                  <Form.Group className='my-3'>
-                     <Form.Label>Title</Form.Label>
-                     <Form.Control type="text" value={title} required={true} placeholder="Film Title" 
-                        onChange={(event) => { setTitle(event.target.value) }}></Form.Control>
-                  </Form.Group>
+                     <Form.Group className='my-3'>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control type="text" value={title} required={true} placeholder="Film Title"
+                           onChange={(event) => { setTitle(event.target.value) }}></Form.Control>
+                     </Form.Group>
 
-                  <Form.Group className='my-3'>
-                     <Form.Label>Favorite</Form.Label>
-                     <Form.Check type="checkbox" className="form-check-inline ms-2" checked={favorite} 
-                        required={false} onChange={(event) => { setFavorite(event.target.checked) }}></Form.Check>
-                  </Form.Group>
+                     <Form.Group className='my-3'>
+                        <Form.Label>Favorite</Form.Label>
+                        <Form.Check type="checkbox" className="form-check-inline ms-2" checked={favorite}
+                           required={false} onChange={(event) => { setFavorite(event.target.checked) }}></Form.Check>
+                     </Form.Group>
 
-                  <Form.Group className='my-3'>
-                     <Form.Label>Watchdate</Form.Label>
-                     <Form.Control type="date" value={watchdate?.format("YYYY-MM-DD")} 
-                        onChange={(event) => { setWatchdate(event.target.value) }}></Form.Control>
-                  </Form.Group>
+                     <Form.Group className='my-3'>
+                        <Form.Label>Watchdate</Form.Label>
+                        <Form.Control type="date" value={watchdate}
+                           onChange={(event) => { setWatchdate(event.target.value) }}></Form.Control>
+                     </Form.Group>
 
-                  <Form.Group className='my-3'>
-                     <Form.Label>Rating</Form.Label>
-                     <Form.Control type="number" value={rating} required={false} 
-                        onChange={(event) => { setRating(event.target.value) }} min={0} max={5}></Form.Control>
-                  </Form.Group>
+                     <Form.Group className='my-3'>
+                        <Form.Label>Rating</Form.Label>
+                        <Form.Control type="number" value={rating} required={false}
+                           onChange={(event) => { setRating(event.target.value) }} min={0} max={5}></Form.Control>
+                     </Form.Group>
 
-                  <Form.Group className='my-4' align="right">
-                     <Button variant='outline-warning' onClick={handleCancel} className="me-1 mt-2">Cancel</Button>
-                     <Button variant='outline-success' type="submit" className="ms-1 mt-2">Confirm</Button>
-                  </Form.Group>
-               </Form>
+                     <Form.Group className='my-4' align="right">
+                        <Button variant='outline-warning' onClick={handleCancel} className="me-1 mt-2">Cancel</Button>
+                        <Button variant='outline-success' type="submit" className="ms-1 mt-2">Confirm</Button>
+                     </Form.Group>
+                  </Form>
+               </div>
             </Col>
             <Col></Col>
          </Row>

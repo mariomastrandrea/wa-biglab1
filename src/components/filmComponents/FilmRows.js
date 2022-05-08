@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap'
 import { PencilSquare, Trash, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 
 function FilmRows(props) {
@@ -9,6 +10,11 @@ function FilmRows(props) {
 
    return (
       library.filter(film => film.filter(props.activeFilter))  
+         .sort((film1, film2) => {  // sort films in chronological order (from the last seen to the oldest one)
+            if(!film2.watchdate) return -1;
+            if(!film1.watchdate) return 1;
+            return film2.watchdate.diff(film1.watchdate, "d");
+         })
          .map((film) =>
             <FilmRow setFilmFavorite={props.setFilmFavorite} setFilmRating={props.setFilmRating} 
                deleteFilm={props.deleteFilm} film={film} key={`film-${film.id}`} />)

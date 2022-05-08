@@ -89,7 +89,7 @@ function App() {
                />
             } />
 
-            <Route path="/editFilm/:editFilmId" element={
+            <Route path="/editFilm/:filmId" element={
                <EditFilmPage
                   editFilm={editFilm}
                   films={films}
