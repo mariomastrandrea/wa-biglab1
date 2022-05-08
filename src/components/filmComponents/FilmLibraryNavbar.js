@@ -3,7 +3,7 @@ import { PersonCircle, PlayCircle } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 
-function FilmLibraryNavbar() {
+function FilmLibraryNavbar(props) {
    const navigate = useNavigate();
 
    return (
@@ -17,7 +17,10 @@ function FilmLibraryNavbar() {
             </Navbar.Brand>
 
             <Navbar.Collapse className="flex-md-grow-0 mb-2 mt-3 my-md-0">
-               <Form.Control id="search-box" type="text" placeholder="Search..." />
+               {props.title !== undefined ?
+                  <Navbar.Brand>{props.title}</Navbar.Brand> :
+                  <Form.Control id="search-box" type="text" placeholder="Search..." />
+               }
             </Navbar.Collapse>
 
             <PersonCircle color="white" size="1.6em" className="action-icon" />

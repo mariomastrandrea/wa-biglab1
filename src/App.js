@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { loadFilmLibrary, loadFilters, loadFilmHeaders } from "./FilmLibrary.js";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./routes/Home";
-import NewFilmForm from "./routes/NewFilmForm";
-import EditFilmForm from "./routes/EditFilmForm";
+import NewFilmPage from "./routes/NewFilmPage";
+import EditFilmPage from "./routes/EditFilmPage";
 
 const filmLibrary = loadFilmLibrary();
 const filmFilters = loadFilters();
@@ -80,18 +80,17 @@ function App() {
                   deleteFilm={deleteFilm}
                   headers={headers}
                   films={films}
-                  filterFlag={true}
                />
             } />
 
             <Route path="/addFilm" element={
-               <NewFilmForm
+               <NewFilmPage
                   addFilm={addFilm}
                />
             } />
 
             <Route path="/editFilm/:editFilmId" element={
-               <EditFilmForm
+               <EditFilmPage
                   editFilm={editFilm}
                   films={films}
                />

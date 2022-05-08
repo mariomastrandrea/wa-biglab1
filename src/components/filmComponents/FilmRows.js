@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap'
-import { PencilSquare, Trash, Star, StarFill, StarHalf } from 'react-bootstrap-icons';
+import { PencilSquare, Trash, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -8,7 +8,7 @@ function FilmRows(props) {
    let library = props.films;
 
    return (
-      library.filter(film => film.filter(props.activeFilter))
+      library.filter(film => film.filter(props.activeFilter))  
          .map((film) =>
             <FilmRow setFilmFavorite={props.setFilmFavorite} setFilmRating={props.setFilmRating} 
                deleteFilm={props.deleteFilm} film={film} key={`film-${film.id}`} />)
@@ -44,20 +44,17 @@ function FilmRow(props) {
 function Rating(props) {
    const rating = (props.film.rating >= 0 && props.film.rating <= 5) ? props.film.rating : 0;
    const [hoverRating, setHoverRating] = useState(rating);
-   let count = 0;
    let stars = [];
 
    for (let i = 0; i < 5; i++) {
-      count++;
-
       stars.push(i < hoverRating ?
          <StarFill color={rating === hoverRating ? "current-color" : "#0d6efd"}
             onMouseOut={() => setHoverRating(rating)} onMouseOver={() => setHoverRating(i + 1)}
             onClick={() => props.setFilmRating(props.film.id, i + 1)} 
-            key={`${count}-star`} className="action-icon" /> :
+            key={`${i+1}-star`} className="action-icon" /> :
          <Star onMouseOut={() => setHoverRating(rating)} onMouseOver={() => setHoverRating(i + 1)}
             onClick={() => props.setFilmRating(props.film.id, i + 1)} 
-            key={`${count}-star`} className="action-icon" />
+            key={`${i+1}-star`} className="action-icon" />
       );
    }
 
